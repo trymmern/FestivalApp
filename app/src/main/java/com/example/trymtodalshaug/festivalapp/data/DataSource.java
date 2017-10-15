@@ -70,10 +70,10 @@ public class DataSource {
         db = dbHelper.getReadableDatabase();
 
         String selectQuery = "SELECT  " +
-                PackingListItemContract.PackingListItemEntry.ID + ',' +
-                PackingListItemContract.PackingListItemEntry.NAME + ',' +
-                PackingListItemContract.PackingListItemEntry.IS_CHECKED + ',' +
-                " FROM " + PackingListItemContract.PackingListItemEntry.TABLE_NAME;
+                PackingListItemContract.PackingListItemEntry.ID + ", " +
+                PackingListItemContract.PackingListItemEntry.NAME + ", " +
+                PackingListItemContract.PackingListItemEntry.IS_CHECKED + " " +
+                "FROM " + PackingListItemContract.PackingListItemEntry.TABLE_NAME + ";";
 
         //User user = new User();
         List<PackingListItem> packingListItems = new ArrayList<>();

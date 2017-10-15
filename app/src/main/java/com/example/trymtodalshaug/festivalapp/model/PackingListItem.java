@@ -16,9 +16,9 @@ public class PackingListItem implements Serializable {
     private String name;
     private int isChecked;
 
-    public PackingListItem(String name, int isChecked) {
+    public PackingListItem(String name) {
         this.name = name;
-        this.isChecked = isChecked;
+        isChecked = 0;
     }
 
     public PackingListItem() {

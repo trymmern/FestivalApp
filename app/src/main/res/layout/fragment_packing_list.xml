@@ -1,16 +1,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
+    android:weightSum="2"
     tools:context="com.example.trymtodalshaug.festivalapp.fragments.PackingListFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_packing_list"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_weight="1.9"
+        >
 
-    <include layout="@layout/add_packing_list_item"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_packing_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_weight="0.1">
+
+        <include layout="@layout/add_packing_list_item" />
+    </FrameLayout>
 
 </LinearLayout>

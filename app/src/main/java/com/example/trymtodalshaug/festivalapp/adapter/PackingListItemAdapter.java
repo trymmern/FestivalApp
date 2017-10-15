@@ -39,7 +39,7 @@ public class PackingListItemAdapter extends RecyclerView.Adapter<PackingListItem
 
     @Override
     public long getItemId(int pos) {
-        return packingListItems.get(pos).getid();
+        return packingListItems.get(pos).getId();
     }
 
     public void updateList(List<PackingListItem> newList) {
