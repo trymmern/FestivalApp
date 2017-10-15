@@ -12,26 +12,33 @@ import static android.R.attr.id;
 
 public class PackingListItem implements Serializable {
 
-    private long id;
-    private CheckBox checkBox;
+    private int id;
     private String name;
+    private int isChecked;
 
-    public PackingListItem(long id, CheckBox checkBox, String name) {
-        this.id = id;
-        this.checkBox = checkBox;
+    public PackingListItem(String name, int isChecked) {
         this.name = name;
+        this.isChecked = isChecked;
     }
 
-    public long getid() {
+    public PackingListItem() {
+        // Empty constructor
+    }
+
+    public int getId() {
         return id;
     }
 
-    public CheckBox getCheckBox() {
-        return checkBox;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setCheckBox(CheckBox checkBox) {
-        this.checkBox = checkBox;
+    public int getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(int isChecked) {
+        this.isChecked = isChecked;
     }
 
     public String getName() {

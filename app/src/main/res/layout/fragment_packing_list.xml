@@ -11,6 +11,6 @@
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 
-    <include layout="@layout/fragment_add_packing_list_item"/>
+    <include layout="@layout/add_packing_list_item"/>
 
 </LinearLayout>

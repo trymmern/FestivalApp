@@ -59,6 +59,7 @@ public class PackingListItemAdapter extends RecyclerView.Adapter<PackingListItem
         holder.populateRow(getItem(position));
     }
 
+
     /**
      * View Holder Class
      */
