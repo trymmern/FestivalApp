@@ -59,6 +59,9 @@ public class PackingListItemAdapter extends RecyclerView.Adapter<PackingListItem
         holder.populateRow(getItem(position));
     }
 
+    /**
+     * View Holder Class
+     */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private CheckBox checkBox;
         private TextView name;
