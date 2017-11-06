@@ -29,14 +29,17 @@ public class DataSource {
         dbHelper = new DBHelper(context);
     }
 
+    // Opens the database
     public void open() {
         db = dbHelper.getWritableDatabase();
     }
 
+    // Closes the database
     public void close() {
         dbHelper.close();
     }
 
+    // Insert an item into the database
     public void insertItem(PackingListItem item) {
         open();
 
@@ -48,12 +51,13 @@ public class DataSource {
         close();
     }
 
+    // Update a packing list item
     public void updateItem(PackingListItem item) {
         open();
 
         ContentValues values = new ContentValues();
 
-        values.put(PackingListItemContract.PackingListItemEntry.NAME, item.getName());
+        values.put(PackingListItemContract.PackingListItemEntry.IS_CHECKED, item.getIsChecked());
 
         db.update(PackingListItemContract.PackingListItemEntry.TABLE_NAME, values,
                 PackingListItemContract.PackingListItemEntry.ID + "= ?",
@@ -63,8 +67,19 @@ public class DataSource {
         close();
     }
 
+    // Delete an item from database
+    public void deleteItem(PackingListItem item) {
+        open();
 
+        db.delete(PackingListItemContract.PackingListItemEntry.TABLE_NAME,
+                PackingListItemContract.PackingListItemEntry.ID + " =?",
+                new String[] {
+                        String.valueOf(item.getId())
+                });
+        close();
+    }
 
+    // Retrieve all packing list items from the database
     public List<PackingListItem> getPackingListItems() {
         //Open connection to read only
         db = dbHelper.getReadableDatabase();
@@ -75,7 +90,6 @@ public class DataSource {
                 PackingListItemContract.PackingListItemEntry.IS_CHECKED + " " +
                 "FROM " + PackingListItemContract.PackingListItemEntry.TABLE_NAME + ";";
 
-        //User user = new User();
         List<PackingListItem> packingListItems = new ArrayList<>();
 
         Cursor cursor = db.rawQuery(selectQuery, null);

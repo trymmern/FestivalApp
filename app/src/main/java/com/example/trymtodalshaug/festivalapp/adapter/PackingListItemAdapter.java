@@ -22,31 +22,46 @@ public class PackingListItemAdapter extends RecyclerView.Adapter<PackingListItem
 
     final Context context;
     private final List<PackingListItem> packingListItems;
+    private PackingListItemClickListener itemClickListener;
 
-    public PackingListItemAdapter(Context context, List<PackingListItem> packingListItems) {
+    public PackingListItemAdapter(Context context, List<PackingListItem> packingListItems,
+                                  PackingListItemClickListener itemClickListener) {
         this.context = context;
         this.packingListItems = packingListItems;
+        this.itemClickListener = itemClickListener;
     }
 
+    // Listener interface for click and long click
+    public interface PackingListItemClickListener {
+        void packingListItemOnClick(PackingListItem item, int pos);
+        void packingListItemOnLongClick(PackingListItem item, int pos);
+    }
+
+    // Returns the amount of items in the packing list
     @Override
     public int getItemCount() {
         return packingListItems.size();
     }
 
-    private PackingListItem getItem(int pos) {
+    // Returns a certain packing list item
+    public PackingListItem getItem(int pos) {
         return packingListItems.get(pos);
     }
 
+    // Returns the id of a certain packing list item
     @Override
     public long getItemId(int pos) {
         return packingListItems.get(pos).getId();
     }
 
+    // Updates the list by replacing the old one
+    // with a new one
     public void updateList(List<PackingListItem> newList) {
         packingListItems.clear();
         packingListItems.addAll(newList);
     }
 
+    // Creates the view holder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -54,11 +69,30 @@ public class PackingListItemAdapter extends RecyclerView.Adapter<PackingListItem
         return new ViewHolder(itemView);
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.populateRow(getItem(position));
-    }
 
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        final PackingListItem items = packingListItems.get(position);
+
+        holder.populateRow(getItem(position));
+        //holder.removeAt(position);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.packingListItemOnClick(items, position);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                itemClickListener.packingListItemOnLongClick(items, position);
+                return true;
+            }
+        });
+    }
+    
 
     /**
      * View Holder Class
@@ -66,7 +100,7 @@ public class PackingListItemAdapter extends RecyclerView.Adapter<PackingListItem
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private CheckBox checkBox;
         private TextView name;
-        PackingListItem selectedPackingListItem;
+        private PackingListItem selectedPackingListItem;
 
         public ViewHolder(View view) {
             super(view);
@@ -89,8 +123,23 @@ public class PackingListItemAdapter extends RecyclerView.Adapter<PackingListItem
             context.startActivity(intent);
         }
 
+        public PackingListItem getSelectedPackingListItem() {
+            selectedPackingListItem = getItem(getAdapterPosition());
+            return selectedPackingListItem;
+        }
+
+        // Populates a row in the packing list
         public void populateRow(PackingListItem item) {
+            boolean isChecked = item.getIsChecked() == 1;
+
+            checkBox.setChecked(isChecked);
             name.setText(item.getName());
+        }
+
+        public void removeAt(int position) {
+            packingListItems.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, packingListItems.size());
         }
     }
 }

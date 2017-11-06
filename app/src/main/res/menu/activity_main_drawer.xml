@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_dashboard"
-            android:icon="@drawable/icon_dashboard"
-            android:title="Dashboard" />
-        <item
-            android:id="@+id/nav_packing_list"
-            android:icon="@drawable/icon_packing_list"
-            android:title="Packing List" />
-    </group>
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/icon_dashboard"
+        android:title="Dashboard" />
+
+    <item android:title="Music">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_schedule"
+                android:icon="@drawable/icon_schedule"
+                android:title="Schedule"
+                />
+            <item
+                android:id="@+id/nav_artists"
+                android:icon="@drawable/icon_artists"
+                android:title="Artists"
+                />
+            <item
+                android:id="@+id/nav_favourites"
+                android:icon="@drawable/icon_favourites"
+                android:title="Favourites"
+                />
+        </menu>
+    </item>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_packing_list"
+                android:icon="@drawable/icon_packing_list"
+                android:title="Packing List" />
+            <item
+                android:id="@+id/nav_wallet"
+                android:icon="@drawable/icon_wallet"
+                android:title="Wallet" />
+            <item
+                android:id="@+id/nav_map"
+                android:icon="@drawable/icon_map"
+                android:title="Map" />
+        </menu>
+    </item>
+
+
 
     <!--<item android:title="Communicate">
         <menu>
